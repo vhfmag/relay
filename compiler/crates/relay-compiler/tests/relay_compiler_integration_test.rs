@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<44313b4ad0ca41fac58e6a820c78a157>>
+ * @generated SignedSource<<907506e37d06c4b8c54cc6214080b715>>
  */
 
 mod relay_compiler_integration;
@@ -66,6 +66,20 @@ async fn custom_scalar_variable_default_arg_non_strict() {
     let input = include_str!("relay_compiler_integration/fixtures/custom_scalar_variable_default_arg_non_strict.input");
     let expected = include_str!("relay_compiler_integration/fixtures/custom_scalar_variable_default_arg_non_strict.expected");
     test_fixture(transform_fixture, file!(), "custom_scalar_variable_default_arg_non_strict.input", "relay_compiler_integration/fixtures/custom_scalar_variable_default_arg_non_strict.expected", input, expected).await;
+}
+
+#[tokio::test]
+async fn defer_codegen_flow() {
+    let input = include_str!("relay_compiler_integration/fixtures/defer_codegen_flow.input");
+    let expected = include_str!("relay_compiler_integration/fixtures/defer_codegen_flow.expected");
+    test_fixture(transform_fixture, file!(), "defer_codegen_flow.input", "relay_compiler_integration/fixtures/defer_codegen_flow.expected", input, expected).await;
+}
+
+#[tokio::test]
+async fn defer_codegen_typescript() {
+    let input = include_str!("relay_compiler_integration/fixtures/defer_codegen_typescript.input");
+    let expected = include_str!("relay_compiler_integration/fixtures/defer_codegen_typescript.expected");
+    test_fixture(transform_fixture, file!(), "defer_codegen_typescript.input", "relay_compiler_integration/fixtures/defer_codegen_typescript.expected", input, expected).await;
 }
 
 #[tokio::test]

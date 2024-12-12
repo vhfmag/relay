@@ -1,0 +1,35 @@
+//- foo.ts
+graphql`
+  fragment fooFirstNameFragment on Query {
+   user { firstName }
+  }`;
+graphql`
+  fragment fooLastNameFragment on Query {
+   user { lastName }
+  }`;
+graphql`
+  fragment fooDisplayNameFragment on Query {
+   user { displayName }
+  }`;
+graphql`
+  query fooQuery @raw_response_type {
+   user {
+    age
+   }
+   ...fooFirstNameFragment @defer
+   ...fooLastNameFragment @defer
+   ...fooDisplayNameFragment @defer
+  }`;
+
+//- relay.config.json
+{
+  "language": "typescript",
+  "schema": "./schema.graphql",
+  "eagerEsModules": true
+}
+
+//- schema.graphql
+type User { firstName: String, lastName: String, displayName: String, age: Int }
+type Query { user: User }
+
+directive @defer(if: Boolean! = true, label: String) on FRAGMENT_SPREAD | INLINE_FRAGMENT
